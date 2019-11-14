@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}User Profile{% endblock %}
+{% block page_content %}
+	<div class="page-header">
+	{% if name %}
+		<h1>Hello, {{name|safe|capitalize}}!</h1>
+	{% else %}		
+		<h1>Hello Stranger!</h1>
+	{% endif %}
+	<p>
+			this line is to show how we can pass more than one parameter to a template {{me}}
+   	</p>
+	</div>
+{% endblock %}

@@ -1,13 +1,23 @@
-from flask import Flask
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+
 app1 = Flask(__name__)
+
+bootstrap = Bootstrap(app1)
+
+mydict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
 
 @app1.route('/')
 def index():
-    return '<h1>Hello World!</h1>'
+    return render_template('index.html',mydict=mydict)
 
 @app1.route('/user/<name>')
 def SayHello2User(name):
-    return '<h1>Hi %s!</h1>' % name.capitalize()
+    return render_template('user.html', name=name, me='*ROCK STAR*')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app1.run(debug=True)
