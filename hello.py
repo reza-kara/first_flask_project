@@ -1,23 +1,28 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from datetime import datetime
 
-app1 = Flask(__name__)
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'hard to guess string'
 
-bootstrap = Bootstrap(app1)
+bootstrap = Bootstrap(app)
 
-mydict = {
-  "brand": "Ford",
-  "model": "Mustang",
-  "year": 1964
-}
+moment = Moment(app)
+myDate = datetime.utcnow()
 
-@app1.route('/')
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
+@app.route('/')
 def index():
-    return render_template('index.html',mydict=mydict)
+    return render_template('index.html',current_time=datetime.utcnow())
 
-@app1.route('/user/<name>')
-def SayHello2User(name):
-    return render_template('user.html', name=name, me='*ROCK STAR*')
-
-if __name__ == '__main__':
-    app1.run(debug=True)
+@app.route('/user/<name>')
+def user(name):
+    return render_template('user.html', name=name)

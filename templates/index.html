@@ -1,10 +1,23 @@
 {% extends "base.html" %}
+
 {% block title %}Index{% endblock %}
-{% block content %}
-<div class="page-header">
-	<img src="static/smile.ico" alt="Keep smile!!!">
-	<h1>Welcome to my first Flask application!</h1>
-	<h2>this is a dictionary passed to a template</h2>
-	<p>A value from a dictionary: {{ mydict }}.</p>
-</div>
+
+{% block page_content %}
+	<style class="column" type="text/css">
+		.logoP1 { color: #ff0000; }
+		.logoP2 { color: #00ff00; }
+		.logoP3 { color: #0000ff; }
+	</style>
+	<div class="page-header">
+		<div>
+			<h1>
+			<span class="column">Take the</span>
+			<span class="logoP1">First</span><span class="logoP2">Step</span><span class="logoP3">In</span>
+			<span class="column">&lt;technology&gt;!</span>
+			</h1>
+		</div>
+		<p>Here is where you can find a roadmap.</p>
+	</div>
+	<p> {{ myDate }} </p>
+	<p>The local date and time is {{ moment(current_time).format('MMMM DD YYYY') }}.</p>
 {% endblock %}
